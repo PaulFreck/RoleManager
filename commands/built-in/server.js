@@ -13,9 +13,10 @@ module.exports = {
 		//console.log(interaction.guild.roles.cache);
 
 		roles.forEach(role => {
-			//impliment a way to check if this is apart of the 
-			const members = role.members.cache
-			members.forEach(member => console.log(member))
+			//impliment a way to check if this equal to the input, prob if input.name == role.name
+			const members = role.members;
+			//console.log(role.members);
+			members.forEach(member => console.log(member)) //eventually add the members to smth to print out.
 		}); 
 
 		await interaction.reply(`This server is ${interaction.guild.name} and has ${interaction.guild.memberCount} members.`);
