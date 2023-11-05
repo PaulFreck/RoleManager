@@ -14,7 +14,7 @@ module.exports = {
 	async execute(interaction) {
 		const target = interaction.options.getRole('roleone').name;
 		console.log(target);
-		const target2 = interaction.options.getRole('roletwo') ?? null;
+		var target2 = interaction.options.getRole('roletwo') ?? null;
 		console.log(target2);
 		if (target2 !== null){
 			target2 = target2.name;
@@ -47,11 +47,11 @@ module.exports = {
 		}); 
 		var string = null;
 		console.log(finalArray);
-		if (finalArray !== null){
+		if (finalArray === undefined){
 			 string = finalArray.join(',');
 		}
 		else{
-			string = "No such user has both roles";
+			string = "No such user has these roles";
 		}
 		await interaction.reply(string);
 	},
