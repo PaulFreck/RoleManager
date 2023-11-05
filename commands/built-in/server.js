@@ -13,9 +13,9 @@ module.exports = {
 				.setDescription('the 2nd role you want to compare to')),
 	async execute(interaction) {
 		const target = interaction.options.getRole('roleone').name;
-		console.log(target);
+		//console.log(target);
 		var target2 = interaction.options.getRole('roletwo') ?? null;
-		console.log(target2);
+		//console.log(target2);
 		if (target2 !== null){
 			target2 = target2.name;
 		}
@@ -29,25 +29,26 @@ module.exports = {
 			const members = role.members;
 			if (target === role.name){
 				members.forEach(member => {
-					targetArray.push(member.user.globalName);
+					console.log(member);
+					targetArray.push(member.user.tag);
 					console.log("test!");
 					console.log(target2 === null);
-					if(target2 === null || target2Array.includes(member.user.globalName) ) {
-						finalArray.push(member.user.globalName);
-						console.log(member.user.globalName);
+					if(target2 === null || target2Array.includes(member.user.tag) ) {
+						finalArray.push(member.user.tag);
+						console.log(member.user.tag);
 					}})
 			}
 			if ( target2 !== null && target2 === role.name){
 				members.forEach(member => {
-					targetArray.push(member.user.globalName)
-					if(targetArray.includes(member.user.globalName) ) {
-						finalArray.push(member.user.globalName);
+					targetArray.push(member.user.tag)
+					if(targetArray.includes(member.user.tag) ) {
+						finalArray.push(member.user.tag);
 					}}) 
 			}
 		}); 
 		var string = null;
 		console.log(finalArray);
-		if (finalArray === undefined){
+		if (finalArray.length !== 0){
 			 string = finalArray.join(',');
 		}
 		else{
