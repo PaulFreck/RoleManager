@@ -17,7 +17,7 @@ module.exports = {
 		const target = interaction.options.getUser('userone'); //inputs from user above
         const userPromise = interaction.guild.members.fetch(target.id);
             userPromise.then(user => {
-            user.roles.addRole(role.id)
+            user.roles.add(role.id)
         });
         console.log(target.constructor.name);
         console.log(role.constructor.name);
