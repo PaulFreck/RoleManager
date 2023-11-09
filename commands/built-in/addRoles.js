@@ -16,22 +16,22 @@ module.exports = {
 				.setRequired(true))
 		.addUserOption(optionthree =>
 			optionthree.setName('usertwo')
-				.setDescription('the first user to add the role to'))
+				.setDescription('the second user to add the role to'))
 		.addUserOption(optionfour =>
 			optionfour.setName('userthree')
-				.setDescription('the first user to add the role to'))
+				.setDescription('the third user to add the role to'))
 		.addUserOption(optionfive =>
 			optionfive.setName('userfour')
-				.setDescription('the first user to add the role to'))
+				.setDescription('the fourth user to add the role to'))
 		.addUserOption(optionsix =>
 			optionsix.setName('userfive')
-				.setDescription('the first user to add the role to'))
+				.setDescription('the fifth user to add the role to'))
 		.addUserOption(optionseven =>
 			optionseven.setName('usersix')
-				.setDescription('the first user to add the role to'))
+				.setDescription('the sixth user to add the role to'))
 		.addUserOption(optioneight =>
 			optioneight.setName('userseven')
-				.setDescription('the first user to add the role to')),
+				.setDescription('the seventh user to add the role to')),
 	async execute(interaction) {
 		const role = interaction.options.getRole('roletoadd'); //inputs from role above
 		const users = new Array();
@@ -42,15 +42,15 @@ module.exports = {
 		users.push(interaction.options.getUser('userfive') ?? null); 
 		users.push(interaction.options.getUser('usersix') ?? null);   
 		users.push(interaction.options.getUser('userseven') ?? null); 
-		for (let i = 0; i < users.length; i++) {
-			if (users[i] != null)
+		for (let i = 0; i < users.length; i++) { //for each user in the command
+			if (users[i] != null) //if non null
 			{
 				const userPromise = interaction.guild.members.fetch(users[i].id);
             	userPromise.then(user => {
-            		user.roles.add(role.id)
+            		user.roles.add(role.id) //add the provided role to them
         		});
 			}
-			//could add a else: exit here, but i dont want to incase someone adds the options not in order.git 
+			//could add a else: exit here, but i dont want to incase someone adds the options not in order.
 		}
 		await interaction.reply("It has been done.");
 		},
