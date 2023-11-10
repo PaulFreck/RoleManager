@@ -13,6 +13,7 @@ client.commands = new Collection(); //allows the rest of the progress to get com
 const foldersPath = path.join(__dirname, 'commands'); //gets all files in commands
 const commandFolders = fs.readdirSync(foldersPath);
 //const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js')); //nothing but js gets added
+//might need the code above to handle things that aren't .js in commands
 
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
@@ -29,34 +30,21 @@ for (const folder of commandFolders) {
 		}
 }}
 
-// When the client is ready, run this code (only once)
-// We use 'c' for the event parameter to keep it separate from the already defined 'client'
-client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
-});
+const eventsPath = path.join(__dirname, 'events');//gets all files in events
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js')); //nothing but js gets added
+
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args)); //execute once if it's once is true
+	} else {
+		client.on(event.name, (...args) => event.execute(...args)); //else execute always
+	}
+}
+
 
 // Log in to Discord with your client's 
 client.login(token);
 
-client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-	//beyond this calls the execute() func of the relevant function when a command is created, throwing errors described below
-	const command = interaction.client.commands.get(interaction.commandName);
-
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
-	}
-
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', ephemeral: true });
-		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-		}
-	}
-}); 
 
