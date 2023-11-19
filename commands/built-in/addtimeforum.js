@@ -1,4 +1,4 @@
-var {collection} = require('onThreadCreation.js');
+
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {

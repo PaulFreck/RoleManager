@@ -1,4 +1,4 @@
-const { Events } = require('discord.js');
+/*const { Events } = require('discord.js');
 export var collection = new Map()
 
 module.exports = {
@@ -20,4 +20,4 @@ async function waitToDelete(interaction){
 	catch (err){
 		console.log(err);
 	}
-}
+}*/

@@ -47,7 +47,9 @@ module.exports = {
 			{
 				const userPromise = interaction.guild.members.fetch(users[i].id);
             	userPromise.then(user => {
-            		user.roles.add(role.id) //add the provided role to them
+					
+            		user.roles.add(role.id).catch(e => console.log(e));
+					
         		});
 			}
 			//could add a else: exit here, but i dont want to incase someone adds the options not in order.
