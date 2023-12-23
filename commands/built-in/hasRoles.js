@@ -27,13 +27,14 @@ module.exports = {
 			if (target === role.name){ 
 				members.each(member => {
 					targetArray.push(member.user.toString());
+					
 					if(target2 === null || target2Array.includes(member.user.toString()) ) {
 							finalArray.push(member.user.toString()); //iterate through them and if target2Array has them as well, if so, push to finalArray which will eventually be returned
 				}})
 			}
 			if ( target2 !== null && target2 === role.name){
 				members.each(member => {
-					targetArray.push(member.user.toString())
+					target2Array.push(member.user.toString())
 					if(targetArray.includes(member.user.toString()) ) { //iterate through them and if targetArray has them as well, if so, push to finalArray which will eventually be returned
 						finalArray.push(member.user.toString());
 				}}) 

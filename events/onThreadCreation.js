@@ -1,5 +1,4 @@
 /*const { Events } = require('discord.js');
-export var collection = new Map()
 
 module.exports = {
 	name: Events.ThreadCreate,
