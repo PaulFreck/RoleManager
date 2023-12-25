@@ -7,14 +7,15 @@ module.exports = class delayHolderMap
         console.log(file);
         //read file in and create our collection. If empty console.log it 
     }
-    add(element)
-    {
-        add(element, 7)
-    }
     add(element, delay)
     {
-        this.map.set(element, delay)
-        write()
+        if (delay == undefined)
+        {
+            delay = 7
+        }
+        this.map.set(element, delay * 1000) //days, hours, minutes, seconds, ms
+        console.log(this.map)
+        this.write()
     }
     changeDelay(element, newDelay)
     {
@@ -26,6 +27,7 @@ module.exports = class delayHolderMap
     }
     write()
     {
+        return true
         //private method that writes what we have to a txt file to remember it.
     }
 };

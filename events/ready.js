@@ -1,5 +1,4 @@
 const { Events } = require('discord.js');
-const delayHolderMap = require('../delayHolderMap');
 
 
 // When the client is ready, run this code (only once)
