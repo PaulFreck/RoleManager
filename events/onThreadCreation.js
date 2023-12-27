@@ -11,13 +11,12 @@ module.exports = {
 };
 
 async function waitToDelete(interaction){
-	const delayMap = new delayHolderMap("file");
+	const delayMap = new delayHolderMap("output.txt");
 	delayMap.add(interaction.id);
 	const delayOriginal = delayMap.get(interaction.id);
 	var delay = ms => new Promise(res => setTimeout(res, ms));
 	
 	try{
-		//collection.set(interaction.id, 1000 * 60)//secs, mins, hours, days. * 7 for 7 days
 		delayChanged = true
 		while(delayChanged){
 			await delay(delayMap.get(interaction.id))
