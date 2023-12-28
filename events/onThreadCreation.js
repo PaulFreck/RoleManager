@@ -5,7 +5,7 @@ module.exports = {
 	
 	name: Events.ThreadCreate,
 	async execute(interaction) {
-		console.log(interaction);
+		//console.log(interaction);
 		waitToDelete(interaction)
 	},
 };
@@ -21,7 +21,7 @@ async function waitToDelete(interaction){
 		while(delayChanged){
 			await delay(delayMap.get(interaction.id))
 			.then(() => {
-				console.log("True!")
+				//console.log("True!")
 				if (delayOriginal == delayMap.get(interaction.id)){delayChanged = false}
 				else{delayChanged = true}})
 			.then(() => {if(delayChanged){delay = ms => new Promise(res => setTimeout(res, delayMap.get(interaction.id) - delayOriginal))}});
