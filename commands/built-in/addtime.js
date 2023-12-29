@@ -18,7 +18,7 @@ module.exports = {
 		const channel = interaction.options.getChannel('thread'); //inputs from thread above
 		var delay = interaction.options.getInteger('delay');
 		const delayMap = new delayHolderMap("output.txt");
-		var orginalDelay = parseInt(delayMap.get(channel.id)) / (1000) //needs to be updated as this goes on
+		var orginalDelay = parseInt(delayMap.get(channel.id)) / (1000 * 60) //needs to be updated as this goes on
 		console.log(orginalDelay)
 		if (isNaN(orginalDelay))
 			orginalDelay = 0

@@ -15,8 +15,18 @@ module.exports = class delayHolderMap
             {
                 this.map.set(mapLine[i], mapLine[i+1])
             }
-
-
+    }
+    update() //function here that takes what's currently in the map structure and updates it. This should be done by what's currently in the text file as that's the easiest way to resolve state probably?
+    {
+        var mapLine = "";
+        const allContents = fs.readFileSync('output.txt', 'utf-8');
+        mapLine = allContents.split(/\n|:/)
+       // console.log(mapLine)
+        if (mapLine.length > 0)
+            for(let i = 1; i < mapLine.length; i += 2)
+            {
+                this.map.set(mapLine[i], mapLine[i+1])
+            }
     }
     add(element, delay)
     {
@@ -24,7 +34,7 @@ module.exports = class delayHolderMap
         {
             delay = 7
         }
-        this.map.set(element, delay * 1000) //days, hours, minutes, seconds, ms
+        this.map.set(element, delay * 1000 * 60) //days, hours, minutes, seconds, ms
        // console.log(this.map)
         this.write()
     }

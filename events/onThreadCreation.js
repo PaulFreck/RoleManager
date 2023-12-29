@@ -13,23 +13,36 @@ module.exports = {
 async function waitToDelete(interaction){
 	const delayMap = new delayHolderMap("output.txt");
 	delayMap.add(interaction.id);
-	const delayOriginal = delayMap.get(interaction.id);
-	var delay = ms => new Promise(res => setTimeout(res, ms));
+	var delayOriginal = delayMap.get(interaction.id);
+	//var delay = ms => new Promise(res => setTimeout(res, ms));
+	var timeWaited = 0;
 	
 	try{
 		delayChanged = true
 		while(delayChanged){
-			await delay(delayMap.get(interaction.id))
-			.then(() => {
-				//console.log("True!")
-				if (delayOriginal == delayMap.get(interaction.id)){delayChanged = false}
-				else{delayChanged = true}})
-			.then(() => {if(delayChanged){delay = ms => new Promise(res => setTimeout(res, delayMap.get(interaction.id) - delayOriginal))}});
+			await delay(delayMap.get(interaction.id) - timeWaited)
+			
+			delayMap.update()
+			if (delayOriginal == delayMap.get(interaction.id))
+			{
+				delayChanged = false
+				interaction.setLocked(true, "Locked by bot: -time limit expired")
+			}
+			else{
+				timeWaited += delayOriginal
+				delayOriginal = delayMap.get(interaction.id);
+				delayChanged = true
+			}
 		}
 		
-		await interaction.setLocked(true, "Locekd by bot: -time limit expired")
-	}
+	}	
 	catch (err){
 		console.log(err);
 	}
 }
+function delay(time)
+{
+	return new Promise((resolve) => {
+	  setTimeout(resolve, time);
+	});
+};
