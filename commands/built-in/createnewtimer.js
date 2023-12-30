@@ -17,12 +17,17 @@ module.exports = {
             ),
 	async execute(interaction) {
 		const channel = interaction.options.getChannel('thread'); //inputs from thread above
+		if (channel.constructor.name != 'ThreadChannel')
+		{
+			await interaction.reply("The channel supplied is not a Thread channel!");
+			return
+		}
 		const delayIn = interaction.options.getInteger('delay');
 		const delayMap = new delayHolderMap("output.txt");
 		delayMap.add(channel.id, delayIn);
-		var delayOriginal = delayIn;
+		var delayOriginal = delayMap.get(channel.id);
 		var timeWaited = 0;
-		await interaction.reply("Created a timer in: " + channel.toString() + "for: " + delayIn + " days");
+		await interaction.reply("Created a timer in: " + channel.toString() + " for: " + delayIn + " days");
 		try{
 			delayChanged = true
 			while(delayChanged){
@@ -46,7 +51,6 @@ module.exports = {
 			console.log(err);
 		}
 		console.log(interaction, channel, delayIn);
-		waitToDelete(interaction)
 		
 	},
 };
