@@ -16,6 +16,11 @@ module.exports = {
             ),
 	async execute(interaction) {
 		const channel = interaction.options.getChannel('thread'); //inputs from thread above
+		if (channel.constructor.name != 'ThreadChannel')
+		{
+			await interaction.reply("The channel supplied is not a Thread channel!");
+			return
+		}
 		var delay = interaction.options.getInteger('delay');
 		const delayMap = new delayHolderMap("output.txt");
 		var orginalDelay = parseInt(delayMap.get(channel.id)) / (1000 * 60) //needs to be updated as this goes on
