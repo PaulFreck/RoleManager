@@ -11,7 +11,7 @@ module.exports = {
 				.setRequired(true))
         .addIntegerOption(delay => 
             delay.setName('delay')
-				.setDescription('the amount of delay you want')
+				.setDescription('the amount of time you want to add to the existing time (in days)')
 				.setRequired(true)
             ),
 	async execute(interaction) {
@@ -19,10 +19,10 @@ module.exports = {
 		var delay = interaction.options.getInteger('delay');
 		const delayMap = new delayHolderMap("output.txt");
 		var orginalDelay = parseInt(delayMap.get(channel.id)) / (1000 * 60) //needs to be updated as this goes on
-		console.log(orginalDelay)
+		//console.log(orginalDelay)
 		if (isNaN(orginalDelay))
 			orginalDelay = 0
-		console.log(orginalDelay)
+		//console.log(orginalDelay)
 		console.log(delay)
 		delay += orginalDelay
 		//console.log(delay)
