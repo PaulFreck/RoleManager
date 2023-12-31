@@ -15,7 +15,7 @@ module.exports = {
                 .setRequired(false)),
 	async execute(interaction) {
 		channel = interaction.options.getChannel('forum')
-        remove = interaction.options.getUser('remove') ?? false
+        remove = interaction.options.getBoolean('remove') ?? false
         if (channel.constructor.name != 'ForumChannel')
 		{
 			await interaction.reply("The channel supplied is not a Forum channel!");
@@ -25,11 +25,11 @@ module.exports = {
         if (remove)
         {
             arr.remove(channel)
-            await interaction.reply("Removed " + channel);
+            await interaction.reply("Removed " + channel.toString());
         }
         else{
             arr.add(channel)
-            await interaction.reply("Added " + channel);
+            await interaction.reply("Added " + channel.toString());
         }
 	},
 };

@@ -2,11 +2,12 @@ const fs = require('fs')
 
 module.exports = class channelHolder
 {
-    channels = [];
+    channels
+    channel = [];
     constructor() 
     {
         const allContents = fs.readFileSync('channels.txt', 'utf-8');
-        this.channels = allContents.split(/\n/)
+        this.channel = allContents.split(/\n/)
     }
     add(forum)
     {
@@ -23,6 +24,10 @@ module.exports = class channelHolder
     }
     contains(forum)
     {
+       /* if (this.channel == undefined)
+        {
+            return false
+        }*/
         return this.channel.includes(forum)
     }
     write()
@@ -38,6 +43,6 @@ module.exports = class channelHolder
     update()
     {
         const allContents = fs.readFileSync('channels.txt', 'utf-8');
-        this.channels = allContents.split(/\n/)
+        this.channel = allContents.split(/\n/)
     }
 }

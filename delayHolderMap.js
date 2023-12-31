@@ -34,7 +34,8 @@ module.exports = class delayHolderMap
         {
             delay = 7
         }
-        this.map.set(element, delay * 24 * 60 * 60 * 1000) //days, hours, minutes, seconds, ms
+        this.map.set(element, delay * 1000) //days, hours, minutes, seconds, ms
+                                    //* 24 * 60 * 60 
         this.write()
     }
     changeDelay(element, newDelay)
