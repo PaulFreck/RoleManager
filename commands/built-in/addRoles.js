@@ -34,6 +34,11 @@ module.exports = {
 				.setDescription('the seventh user to add the role to')),
 	async execute(interaction) {
 		const role = interaction.options.getRole('roletoadd'); //inputs from role above
+		if (interaction.member.roles.highest.comparePositionTo(role) < 0)
+		{
+			await interaction.reply("Sorry, you don't have the permissions for that.")
+			return
+		}
 		const users = new Array();
 		users.push(interaction.options.getUser('userone'));//inputs from userone above and adds them to an array
 		users.push(interaction.options.getUser('usertwo') ?? null);
