@@ -4,14 +4,14 @@ module.exports = class delayHolderMap
 {
     map = new Map(); //delay is stored in days
     
-    constructor(file) 
+    constructor() 
     {
-        var mapLine = "";
+        var mapLine;
         const allContents = fs.readFileSync('output.txt', 'utf-8');
         mapLine = allContents.split(/\n|:/)
        // console.log(mapLine)
         if (mapLine.length > 0)
-            for(let i = 1; i < mapLine.length; i += 2)
+            for(let i = 0; i < mapLine.length; i += 2)
             {
                 this.map.set(mapLine[i], mapLine[i+1])
             }
@@ -49,7 +49,7 @@ module.exports = class delayHolderMap
     {
         var result = "";
         this.map.forEach((key, value) => {
-            result += "\n" + value + ":" + key //easier to throw out the first line than the last line
+            result += "\n" + value + ":" + key 
         })
         fs.writeFile("output.txt", result, (error) =>{ if (error) throw error;})
         return true

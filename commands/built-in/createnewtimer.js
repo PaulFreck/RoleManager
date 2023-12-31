@@ -23,7 +23,7 @@ module.exports = {
 			return
 		}
 		const delayIn = interaction.options.getInteger('delay');
-		const delayMap = new delayHolderMap("output.txt");
+		const delayMap = new delayHolderMap();
 		delayMap.add(channel.id, delayIn);
 		var delayOriginal = delayMap.get(channel.id);
 		var timeWaited = 0;

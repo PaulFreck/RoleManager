@@ -1,5 +1,6 @@
 const { Events } = require('discord.js');
 const delayHolderMap = require('../delayHolderMap');
+const channelHolder = require('../channelHolder');
 
 module.exports = {
 	
@@ -11,7 +12,12 @@ module.exports = {
 };
 
 async function waitToDelete(interaction){
-	const delayMap = new delayHolderMap("output.txt");
+	const channelArray = new channelHolder();
+	if(!channelArray.contains(interaction.id))
+	{
+		return
+	}
+	const delayMap = new delayHolderMap();
 	delayMap.add(interaction.id);
 	var delayOriginal = delayMap.get(interaction.id);
 	//var delay = ms => new Promise(res => setTimeout(res, ms));
