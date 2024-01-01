@@ -34,10 +34,20 @@ module.exports = {
 				.setDescription('the seventh user to add the role to')),
 	async execute(interaction) {
 		const role = interaction.options.getRole('roletoadd'); //inputs from role above
-		if (interaction.member.roles.highest.comparePositionTo(role) < 0)
+		//console.log(interaction.member.permissions.toArray())
+		var permissionsArray = role.permissions.toArray()
+		if (!(interaction.member.permissions.has('ManageRoles')))
 		{
-			await interaction.reply("Sorry, you don't have the permissions for that.")
+			await interaction.reply("sorry, you need to be able to manage roles.")
 			return
+		}
+		for (let i = 0; i < permissionsArray.length; i++)
+		{
+			if (!(interaction.member.permissions.has(permissionsArray[i])))
+			{
+				await interaction.reply("sorry, you do not have all the permissions that this role does.")
+				return
+			}
 		}
 		const users = new Array();
 		users.push(interaction.options.getUser('userone'));//inputs from userone above and adds them to an array
