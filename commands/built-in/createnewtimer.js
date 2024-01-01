@@ -22,6 +22,10 @@ module.exports = {
 			await interaction.reply("The channel supplied is not a Thread channel!");
 			return
 		}
+		if (channel.locked)
+		{
+			channel.setLocked(false) 
+		}
 		const delayIn = interaction.options.getInteger('delay');
 		const delayMap = new delayHolderMap();
 		delayMap.add(channel.id, delayIn);
@@ -32,7 +36,7 @@ module.exports = {
 			delayChanged = true
 			while(delayChanged){
 				await delay(delayMap.get(channel.id) - timeWaited)
-				console.log("doop!")
+				//console.log("doop!")
 				delayMap.update()
 				if (delayOriginal == delayMap.get(channel.id))
 				{
